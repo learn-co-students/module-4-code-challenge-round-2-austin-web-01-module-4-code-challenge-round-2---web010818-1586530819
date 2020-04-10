@@ -1,6 +1,7 @@
-import React from 'react'
+import React from 'react';
+import Transaction from './Transaction';
 
-const TransactionsList = () => {
+const TransactionsList = (props) => {
 
   return (
     <table className="ui celled striped padded table">
@@ -27,9 +28,12 @@ const TransactionsList = () => {
             </h3>
           </th>
         </tr>
-
-        {"... your code here..."}
-
+        {props.ledger.map(lineItem => (
+          <Transaction
+            key={lineItem.id}
+            lineItem={lineItem}
+          />
+        ))}
       </tbody>
     </table>
   )
