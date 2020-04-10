@@ -27,15 +27,16 @@ class AccountContainer extends Component {
   }
 
   handleChange = (event) => {
+    let search = event.target.value
     this.setState({
-      searchTerm: event.target.value
+      searchTerm: search
     })
-    this.filterResults()
+    this.filterResults(search)
   }
 
-  filterResults = () => {
+  filterResults = (search) => {
     let filtered = this.state.transactions.slice(0)
-    filtered = filtered.filter(i => i.description.toLowerCase().includes(this.state.searchTerm) || i.category.toLowerCase().includes(this.state.searchTerm))
+    filtered = filtered.filter(i => i.description.toLowerCase().includes(search) || i.category.toLowerCase().includes(search))
     this.setState({
       results: filtered
     })
@@ -47,7 +48,6 @@ class AccountContainer extends Component {
       <div>
         <Search handleChange={this.handleChange} />
         { this.state.searchTerm.length > 0 ? <TransactionsList t={this.state.results} /> : <TransactionsList t={this.state.transactions}/> }
-        {console.log(this.state.searchTerm)}
       </div>
     )
   }
